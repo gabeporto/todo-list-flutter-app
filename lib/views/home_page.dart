@@ -4,6 +4,7 @@ import 'package:todo_list_app/controllers/access_controller.dart';
 import 'package:todo_list_app/controllers/user_controller.dart';
 import 'package:todo_list_app/models/user.dart';
 import 'package:todo_list_app/views/login_page.dart';
+import 'package:todo_list_app/views/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  late User? _loggedUser;
+  User? _loggedUser;
 
   @override
   void initState() {
@@ -42,7 +43,10 @@ class _HomePageState extends State<HomePage> {
                 PopupMenuItem(
                   value: 'Perfil',
                   child: const Text('Perfil'),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context, 
+                    MaterialPageRoute(builder: (context) => ProfilePage(user: _loggedUser,)));
+                  },
                 ),
                 PopupMenuItem(
                   value: 'Logout',
@@ -59,7 +63,16 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ],
-              child: Image.network(_loggedUser!.image, width: 40, height: 40),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 20,
+                  child: _loggedUser != null ? 
+                    Image.network(_loggedUser!.image, width: 40, height: 40) : 
+                    const Icon(Icons.person, color: Colors.grey,),
+                ),
+              ),
           ),
         ],
       ),
