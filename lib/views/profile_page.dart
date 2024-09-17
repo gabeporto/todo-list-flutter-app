@@ -71,7 +71,8 @@ class ProfilePage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: (){},
-                  child: const Text('Logout') ,
+                  child: const Text('Logout'
+                  ) ,
                 ),
               ],
             ),  
